@@ -15,6 +15,7 @@ public class CharacterController : MonoBehaviour
 
     public bool isGrounded;
     public Transform GroundSensor;
+    private bool groundedPlayer;
     public float sensorRadius;
     private Vector3 playerVelocity;
 
@@ -38,9 +39,15 @@ public class CharacterController : MonoBehaviour
 
     void Update()
     {
-        //Movement();
+        Movement();
         Jump();
         MovementTPS();
+        
+        groundedPlayer = controller.isGrounded;
+        if (groundedPlayer && playerVelocity.y < 0)
+        {
+            playerVelocity.y = 0f;
+        }
     }
 
     void Movement()
